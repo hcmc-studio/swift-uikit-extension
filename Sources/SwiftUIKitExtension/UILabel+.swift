@@ -8,4 +8,4 @@
 import Foundation
 import UIKit
 
-class XUILabel: UILabel {}
+open class XUILabel: UILabel {}

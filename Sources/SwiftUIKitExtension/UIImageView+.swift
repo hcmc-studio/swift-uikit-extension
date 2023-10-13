@@ -8,4 +8,4 @@
 import Foundation
 import UIKit
 
-class XUIImageView: UIImageView {}
+open class XUIImageView: UIImageView {}
