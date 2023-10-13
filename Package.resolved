@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-quartz-core-extension",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hcmc-studio/swift-quartz-core-extension",
+      "state" : {
+        "branch" : "0.0.55",
+        "revision" : "4e934172192d91be9da8badfe98871c88807cf3b"
+      }
+    }
+  ],
+  "version" : 2
+}
