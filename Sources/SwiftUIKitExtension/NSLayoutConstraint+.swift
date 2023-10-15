@@ -27,7 +27,7 @@ extension UIView {
     }
     
     public func fit(
-        equalTo view: UIView,
+        equalTo dst: UILayoutGuide,
         top: CGFloat? = .zero,
         leading: CGFloat? = .zero,
         trailing: CGFloat? = .zero,
@@ -35,16 +35,16 @@ extension UIView {
     ) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
         if let top = top {
-            constraints.append(topAnchor.constraint(equalTo: view.topAnchor, constant: top))
+            constraints.append(topAnchor.constraint(equalTo: dst.topAnchor, constant: top))
         }
         if let leading = leading {
-            constraints.append(leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: leading))
+            constraints.append(leadingAnchor.constraint(equalTo: dst.leadingAnchor, constant: leading))
         }
         if let trailing = trailing {
-            constraints.append(trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: trailing))
+            constraints.append(trailingAnchor.constraint(equalTo: dst.trailingAnchor, constant: trailing))
         }
         if let bottom = bottom {
-            constraints.append(bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: bottom))
+            constraints.append(bottomAnchor.constraint(equalTo: dst.bottomAnchor, constant: bottom))
         }
         
         return constraints
