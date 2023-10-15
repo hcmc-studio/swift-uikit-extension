@@ -8,12 +8,24 @@
 import Foundation
 import UIKit
 
-open class XUIButton: UIView, UIViewExtension {
+open class XUIButton: UIButton, UIViewExtension {
     public var onClick: (() -> Void)? = nil
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        isUserInteractionEnabled = true
+        addTouchUpInsideTarget()
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        isUserInteractionEnabled = true
+        addTouchUpInsideTarget()
+    }
 }
 
 extension UIViewExtension where Self: UIButton {
-    private func addTouchUpInsideTarget() {
+    func addTouchUpInsideTarget() {
         addTarget(self, action: #selector(invokeOnClick), for: .touchUpInside)
     }
 }

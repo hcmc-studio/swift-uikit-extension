@@ -1,18 +1,18 @@
 //
-//  UILabel+.swift
+//  File.swift
+//  
 //
-//
-//  Created by Ji-Hwan Kim on 10/13/23.
+//  Created by Ji-Hwan Kim on 10/15/23.
 //
 
 import Foundation
 import UIKit
 
-open class XUILabel: UILabel, UIViewExtension {
+open class XUITextView: UITextView, UIViewExtension {
     public var onClick: (() -> Void)? = nil
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
+    public override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
         isUserInteractionEnabled = true
         addOnClickRecognizer()
     }
