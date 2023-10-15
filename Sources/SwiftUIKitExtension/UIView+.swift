@@ -27,26 +27,7 @@ extension UIView {
 }
 
 extension UIViewExtension where Self: UIView {
-    public init() {
-        self = Self.init()
-        addOnClickRecognizer()
-    }
-    
-    public init?(coder: NSCoder) {
-        if let view = Self.init(coder: coder) {
-            self = view
-            addOnClickRecognizer()
-        } else {
-            return nil
-        }
-    }
-    
-    public init(frame: CGRect) {
-        self = Self.init(frame: frame)
-        addOnClickRecognizer()
-    }
-    
-    private func addOnClickRecognizer() {
+    func addOnClickRecognizer() {
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(invokeOnClick)))
     }
 }
