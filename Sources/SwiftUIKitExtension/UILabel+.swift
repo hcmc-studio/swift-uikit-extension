@@ -13,13 +13,11 @@ open class XUILabel: UILabel, UIViewExtension {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        isUserInteractionEnabled = true
         addOnClickRecognizer()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        isUserInteractionEnabled = true
         addOnClickRecognizer()
     }
 }

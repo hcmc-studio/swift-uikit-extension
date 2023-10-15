@@ -13,19 +13,18 @@ open class XUIButton: UIButton, UIViewExtension {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        isUserInteractionEnabled = true
         addTouchUpInsideTarget()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        isUserInteractionEnabled = true
         addTouchUpInsideTarget()
     }
 }
 
 extension UIViewExtension where Self: UIButton {
     func addTouchUpInsideTarget() {
+        isUserInteractionEnabled = true
         addTarget(self, action: #selector(invokeOnClick), for: .touchUpInside)
     }
 }

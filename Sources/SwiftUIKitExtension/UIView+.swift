@@ -28,6 +28,7 @@ extension UIView {
 
 extension UIViewExtension where Self: UIView {
     func addOnClickRecognizer() {
+        isUserInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(invokeOnClick)))
     }
 }
