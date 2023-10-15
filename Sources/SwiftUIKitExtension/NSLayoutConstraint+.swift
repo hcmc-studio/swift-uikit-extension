@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 extension NSLayoutConstraint {
-    public class func activate(constraints arrays: [NSLayoutConstraint]...) {
-        activate(arrays.reduce([], +))
+    public class func activate(_ constraints: [NSLayoutConstraint]...) {
+        activate(constraints.reduce([], +))
     }
 }
 
