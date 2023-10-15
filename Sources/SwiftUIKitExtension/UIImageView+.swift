@@ -8,4 +8,6 @@
 import Foundation
 import UIKit
 
-open class XUIImageView: UIImageView {}
+open class XUIImageView: UIImageView, XUIView {
+    public var onClick: (() -> Void)? = nil
+}

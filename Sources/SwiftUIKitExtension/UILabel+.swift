@@ -8,4 +8,6 @@
 import Foundation
 import UIKit
 
-open class XUILabel: UILabel {}
+open class XUILabel: UILabel, XUIView {
+    public var onClick: (() -> Void)? = nil
+}
