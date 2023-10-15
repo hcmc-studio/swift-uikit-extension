@@ -22,4 +22,16 @@ open class XUIImageView: UIImageView, UIViewExtension {
         isUserInteractionEnabled = true
         addOnClickRecognizer()
     }
+    
+    public override init(image: UIImage?) {
+        super.init(image: image)
+        isUserInteractionEnabled = true
+        addOnClickRecognizer()
+    }
+    
+    public override init(image: UIImage?, highlightedImage: UIImage?) {
+        super.init(image: image, highlightedImage: highlightedImage)
+        isUserInteractionEnabled = true
+        addOnClickRecognizer()
+    }
 }
