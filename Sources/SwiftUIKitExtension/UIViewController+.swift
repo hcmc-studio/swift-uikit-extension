@@ -22,6 +22,7 @@ open class XUIViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
+        initializeFetchDelegate()
         if let fetchDelegate = fetchDelegate {
             Task {
                 do {
@@ -68,6 +69,8 @@ open class XUIViewController: UIViewController {
         
         view.removeGestureRecognizer(backgroundTapGestureRecognizer)
     }
+    
+    open func initializeFetchDelegate() {}
     
     @objc private func onBackgroundClick() {
         view.endEditing(true)
