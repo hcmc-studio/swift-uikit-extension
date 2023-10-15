@@ -57,7 +57,7 @@ extension UINavigationController {
     }
 }
 
-extension XUINavigationController {
+extension UINavigationController {
     @discardableResult
     public func navigate<ViewController: XUIViewController>(
         viewController _: ViewController.Type, // unused
