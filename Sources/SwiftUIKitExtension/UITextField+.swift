@@ -14,13 +14,11 @@ open class XUITextField: UITextField, UIViewExtension {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        addOnClickRecognizer()
         addEditingChangedTarget()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
-        addOnClickRecognizer()
         addEditingChangedTarget()
     }
     
