@@ -22,7 +22,7 @@ open class XUITextField: UITextField, UIViewExtension {
         addEditingChangedTarget()
     }
     
-    @objc func invokeOnTextChange() {
+    @objc open func invokeOnTextChange() {
         onTextChange?()
     }
 }
