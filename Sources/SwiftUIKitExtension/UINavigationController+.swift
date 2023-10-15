@@ -25,7 +25,7 @@ extension XUINavigationController: UIGestureRecognizerDelegate {
     }
 }
 
-extension XUINavigationController {
+extension UINavigationController {
     @discardableResult
     public func pop(
         animated: Bool = true,
