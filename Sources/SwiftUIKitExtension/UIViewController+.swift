@@ -83,7 +83,9 @@ extension XUIViewControllerFetchDelegate {
     public func fetchOnAppearSucceed() {}
     
     public func fetchOnAppearFailed(error: Error) {}
-    
+}
+
+extension XUIViewControllerFetchDelegate {
     func onLoad(viewController: XUIViewController) {
         viewController.onLoadTask = Task<Void, any Error>.execute(
             priority: .high,
