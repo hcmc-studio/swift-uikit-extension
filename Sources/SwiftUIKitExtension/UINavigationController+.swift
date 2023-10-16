@@ -26,6 +26,20 @@ extension XUINavigationController: UIGestureRecognizerDelegate {
 }
 
 extension UINavigationController {
+    public func disableSwipeToBack() {
+        if let self = self as? XUINavigationController {
+            self.performSwipeToBack = false
+        }
+    }
+    
+    public func enableSwipeToBack() {
+        if let self = self as? XUINavigationController {
+            self.performSwipeToBack = true
+        }
+    }
+}
+
+extension UINavigationController {
     @discardableResult
     public func pop(
         animated: Bool = true,
