@@ -47,6 +47,126 @@ open class XUIViewController: UIViewController {
     @objc private func onBackgroundClick() {
         view.endEditing(true)
     }
+    
+    open func buildDialog() -> XUIViewController.DialogBuilder {
+        .init(viewController: self)
+    }
+    
+    @discardableResult
+    open func showFallbackDialog(
+        message: String = "오류가 발생했습니다.",
+        shouldKillApplication: Bool = false,
+        shouldGoBack: Bool = true,
+        handler: @escaping (Dialog, UIAlertAction) -> Void = { dialog, action in }
+    ) -> XUIViewController.Dialog {
+        buildDialog()
+            .set(title: "오류")
+            .set(message: message)
+            .set(action: .default, name: "확인", handler: handler)
+            .build()
+            .show()
+    }
+}
+
+extension XUIViewController {
+    public class DialogBuilder {
+        let viewController: UIViewController
+        var title: String? = nil
+        var message: String? = nil
+        var style: UIAlertController.Style = .alert
+        var animateOnPresent = true
+        var animateOnDismiss = true
+        var actions = [UIAlertAction.Style : (String, (XUIViewController.Dialog, UIAlertAction) -> Void)]()
+        
+        public init(viewController: UIViewController) {
+            self.viewController = viewController
+        }
+    }
+}
+
+extension XUIViewController.DialogBuilder {
+    public func set(title: String?) -> XUIViewController.DialogBuilder {
+        self.title = title
+        return self
+    }
+    
+    public func set(message: String?) -> XUIViewController.DialogBuilder {
+        self.message = message
+        return self
+    }
+    
+    public func set(style: UIAlertController.Style) -> XUIViewController.DialogBuilder {
+        self.style = style
+        return self
+    }
+    
+    public func set(
+        action style: UIAlertAction.Style,
+        name: String
+    ) -> XUIViewController.DialogBuilder {
+        set(
+            action: style,
+            name: name,
+            handler: actions[style]?.1 ?? { dialog, action in dialog.dismiss() }
+        )
+    }
+    
+    public func set(
+        action style: UIAlertAction.Style,
+        name: String,
+        handler: @escaping (XUIViewController.Dialog, UIAlertAction) -> Void
+    ) -> XUIViewController.DialogBuilder {
+        actions[style] = (name, handler)
+        return self
+    }
+    
+    public func set(animateOnPresent: Bool) -> XUIViewController.DialogBuilder {
+        self.animateOnPresent = animateOnPresent
+        return self
+    }
+    
+    public func set(animateOnDismiss: Bool) -> XUIViewController.DialogBuilder {
+        self.animateOnDismiss = animateOnDismiss
+        return self
+    }
+    
+    public func build() -> XUIViewController.Dialog {
+        .init(builder: self)
+    }
+}
+
+extension XUIViewController {
+    public class Dialog {
+        let builder: XUIViewController.DialogBuilder
+        let animateOnPresent: Bool
+        let animateOnDismiss: Bool
+        let alertController: UIAlertController
+        
+        init(builder: XUIViewController.DialogBuilder) {
+            self.builder = builder
+            self.animateOnPresent = builder.animateOnPresent
+            self.animateOnDismiss = builder.animateOnDismiss
+            self.alertController = .init(
+                title: builder.title,
+                message: builder.message,
+                preferredStyle: builder.style
+            )
+        }
+    }
+}
+
+extension XUIViewController.Dialog {
+    @discardableResult
+    public func show() -> XUIViewController.Dialog {
+        builder.viewController.present(alertController, animated: animateOnPresent)
+        return self
+    }
+    
+    @discardableResult
+    public func dismiss() -> XUIViewController.Dialog {
+        alertController.dismiss(animated: animateOnDismiss)
+        return self
+    }
 }
 
 public protocol XUIViewControllerFetchDelegate {
