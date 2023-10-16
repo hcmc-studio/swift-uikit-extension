@@ -74,7 +74,7 @@ extension UINavigationController {
 extension UINavigationController {
     @discardableResult
     public func navigate(
-        initialViewContrrollerStoryboard storyboard: String,
+        initialViewControllerStoryboard storyboard: String,
         animated: Bool = true
     ) -> UIViewController {
         guard let viewController = UIStoryboard(name: storyboard, bundle: .main).instantiateInitialViewController() else {
