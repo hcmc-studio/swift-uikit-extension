@@ -89,7 +89,7 @@ extension XUIViewControllerFetchDelegate {
     func onLoad(viewController: XUIViewController) {
         viewController.onLoadTask = Task<Void, any Error>.execute(
             priority: .high,
-            fetch: fetchOnLoad,
+            withoutResult: fetchOnLoad,
             onSuccess: {
                 viewController.onLoadTask = nil
                 fetchOnLoadDidFinished(error: nil)
@@ -106,7 +106,7 @@ extension XUIViewControllerFetchDelegate {
     func onAppear(viewController: XUIViewController) {
         viewController.onAppearTask = Task<Void, any Error>.execute(
             priority: .high,
-            fetch: fetchOnAppear,
+            withoutResult: fetchOnAppear,
             onSuccess: {
                 viewController.onAppearTask = nil
                 fetchOnAppearDidFinished(error: nil)
