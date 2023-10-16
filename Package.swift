@@ -5,7 +5,10 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftUIKitExtension",
-    platforms: [.iOS("15.0")],
+    platforms: [
+        .iOS("13.0"),
+        .macOS("10.15")
+    ],
     products: [
         .library(
             name: "SwiftUIKitExtension",
@@ -14,7 +17,10 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            name: "SwiftQuartzCoreExtension",
+            url: "https://github.com/hcmc-studio/swift-concurrency-extension.git",
+            branch: "0.0.55"
+        ),
+        .package(
             url: "https://github.com/hcmc-studio/swift-quartz-core-extension.git",
             branch: "0.0.55"
         ),
@@ -22,7 +28,10 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftUIKitExtension",
-            dependencies: ["SwiftQuartzCoreExtension"]
+            dependencies: [
+                .product(name: "SwiftConcurrencyExtension", package: "swift-concurrency-extension"),
+                .product(name: "SwiftQuartzCoreExtension", package: "swift-quartz-core-extension")
+            ]
         ),
         .testTarget(
             name: "SwiftUIKitExtensionTests",

@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "swift-concurrency-extension",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/hcmc-studio/swift-concurrency-extension",
+      "state" : {
+        "branch" : "0.0.55",
+        "revision" : "7ea8b4b62a752b6b27e0d1eead0e5df32ef68e5a"
+      }
+    },
+    {
       "identity" : "swift-quartz-core-extension",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hcmc-studio/swift-quartz-core-extension",

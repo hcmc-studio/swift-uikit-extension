@@ -7,10 +7,13 @@
 
 import Foundation
 import UIKit
+import SwiftConcurrencyExtension
 
 open class XUIViewController: UIViewController {
     open var arguments: [String : Any]!
     open var fetchDelegate: XUIViewControllerFetchDelegate? = nil
+    public fileprivate(set) var onLoadTask: Task<Void, any Error>? = nil
+    public fileprivate(set) var onAppearTask: Task<Void, any Error>? = nil
     
     private lazy var backgroundTapGestureRecognizer = {
         UITapGestureRecognizer(
@@ -23,45 +26,14 @@ open class XUIViewController: UIViewController {
         super.viewDidLoad()
         
         initializeFetchDelegate()
-        if let fetchDelegate = fetchDelegate {
-            Task {
-                do {
-                    try await fetchDelegate.fetchOnLoad()
-                    await MainActor.run {
-                        fetchDelegate.fetchOnLoadDidFinished(error: nil)
-                        fetchDelegate.fetchOnLoadSucceed()
-                    }
-                } catch let error {
-                    await MainActor.run {
-                        fetchDelegate.fetchOnLoadDidFinished(error: error)
-                        fetchDelegate.fetchOnLoadFailed(error: error)
-                    }
-                }
-            }
-        }
+        fetchDelegate?.onLoad(viewController: self)
     }
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         view.addGestureRecognizer(backgroundTapGestureRecognizer)
-        
-        if let fetchDelegate = fetchDelegate {
-            Task {
-                do {
-                    try await fetchDelegate.fetchOnAppear()
-                    await MainActor.run {
-                        fetchDelegate.fetchOnAppearDidFinished(error: nil)
-                        fetchDelegate.fetchOnAppearSucceed()
-                    }
-                } catch let error {
-                    await MainActor.run {
-                        fetchDelegate.fetchOnAppearDidFinished(error: error)
-                        fetchDelegate.fetchOnAppearFailed(error: error)
-                    }
-                }
-            }
-        }
+        fetchDelegate?.onAppear(viewController: self)
     }
     
     open override func viewDidDisappear(_ animated: Bool) {
@@ -111,4 +83,38 @@ extension XUIViewControllerFetchDelegate {
     public func fetchOnAppearSucceed() {}
     
     public func fetchOnAppearFailed(error: Error) {}
+    
+    func onLoad(viewController: XUIViewController) {
+        viewController.onLoadTask = Task<Void, any Error>.execute(
+            priority: .high,
+            fetch: fetchOnLoad,
+            onSuccess: {
+                viewController.onLoadTask = nil
+                fetchOnLoadDidFinished(error: nil)
+                fetchOnLoadSucceed()
+            },
+            onFailure: { error in
+                viewController.onLoadTask = nil
+                fetchOnLoadDidFinished(error: error)
+                fetchOnLoadFailed(error: error)
+            }
+        )
+    }
+    
+    func onAppear(viewController: XUIViewController) {
+        viewController.onAppearTask = Task<Void, any Error>.execute(
+            priority: .high,
+            fetch: fetchOnAppear,
+            onSuccess: {
+                viewController.onAppearTask = nil
+                fetchOnAppearDidFinished(error: nil)
+                fetchOnAppearSucceed()
+            },
+            onFailure: { error in
+                viewController.onAppearTask = nil
+                fetchOnAppearDidFinished(error: error)
+                fetchOnAppearFailed(error: error)
+            }
+        )
+    }
 }
