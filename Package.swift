@@ -18,11 +18,11 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/hcmc-studio/swift-concurrency-extension.git",
-            branch: "0.0.57"
+            branch: "0.0.58"
         ),
         .package(
             url: "https://github.com/hcmc-studio/swift-quartz-core-extension.git",
-            branch: "0.0.57"
+            branch: "0.0.58"
         ),
     ],
     targets: [
