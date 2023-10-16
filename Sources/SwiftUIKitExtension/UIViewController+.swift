@@ -151,6 +151,14 @@ extension XUIViewController {
                 message: builder.message,
                 preferredStyle: builder.style
             )
+            
+            for (style, (title, handler)) in builder.actions {
+                alertController.addAction(.init(title: title, style: style, handler: { [weak self] action in
+                    if let self = self {
+                        handler(self, action)
+                    }
+                }))
+            }
         }
     }
 }
