@@ -47,7 +47,7 @@ extension UINavigationController {
     }
     
     public func push(
-        viewController: XUIViewController,
+        viewController: UIViewController,
         animated: Bool = true,
         completion: @escaping () -> Void = {}
     ) {
@@ -59,6 +59,20 @@ extension UINavigationController {
 
 extension UINavigationController {
     @discardableResult
+    public func navigate(
+        initialViewContrrollerStoryboard storyboard: String,
+        animated: Bool = true
+    ) -> UIViewController {
+        guard let viewController = UIStoryboard(name: storyboard, bundle: .main).instantiateInitialViewController() else {
+            fatalError("Initial view controller is not found in storyboard `\(storyboard)`")
+        }
+        
+        push(viewController: viewController)
+        
+        return viewController
+    }
+    
+    @discardableResult
     public func navigate<ViewController: XUIViewController>(
         viewController _: ViewController.Type, // unused
         storyboard: String,
@@ -69,6 +83,22 @@ extension UINavigationController {
         let viewController = UIStoryboard(name: storyboard, bundle: .main).instantiateViewController(withIdentifier: identifier) as! ViewController
         viewController.arguments = arguments ?? [:]
         push(viewController: viewController)
+        
+        return viewController
+    }
+    
+    @discardableResult
+    public func replace(
+        initialViewControllerStoryboard storyboard: String,
+        animated: Bool = true
+    ) -> UIViewController {
+        guard let viewController = UIStoryboard(name: storyboard, bundle: .main).instantiateInitialViewController() else {
+            fatalError("Initial view controller is not found in storyboard `\(storyboard)`")
+        }
+        
+        pop(animated: false, completion: {
+            self.pushViewController(viewController, animated: animated)
+        })
         
         return viewController
     }
