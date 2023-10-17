@@ -11,11 +11,14 @@ import UIKit
 open class XUITableView: UITableView {}
 
 extension UITableView {
-    public func dequeue<Cell: UITableViewCell>(
+    public func dequeue<Cell: XUITableViewCell>(
         cell: Cell.Type,
         identifier: String,
         for indexPath: IndexPath
     ) -> Cell {
-        dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell
+        let cell = dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell
+        cell.bind()
+        
+        return cell
     }
 }
