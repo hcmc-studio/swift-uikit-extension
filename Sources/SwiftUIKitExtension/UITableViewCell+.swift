@@ -10,7 +10,7 @@ import UIKit
 
 open class XUITableViewCell: UITableViewCell, UIViewExtension {
     public var onClick: (() -> Void)? = nil
-    public let contentContainer = XUIView()
+    open var contentContainer: UIView = XUIView()
     private var task: Task<Void, any Error>? = nil
     private var isViewPresent = false
     
