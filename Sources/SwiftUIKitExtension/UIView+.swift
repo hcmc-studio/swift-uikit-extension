@@ -29,7 +29,7 @@ extension UIView {
         window?.windowScene?.screen.bounds.width ?? .zero
     }
     
-    public var screenHeigh: CGFloat {
+    public var screenHeight: CGFloat {
         window?.windowScene?.screen.bounds.height ?? .zero
     }
 }
