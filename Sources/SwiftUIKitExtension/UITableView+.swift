@@ -18,6 +18,7 @@ extension UITableView {
     ) -> Cell {
         let cell = dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! Cell
         cell.bind()
+        cell.indexPath = indexPath
         
         return cell
     }
