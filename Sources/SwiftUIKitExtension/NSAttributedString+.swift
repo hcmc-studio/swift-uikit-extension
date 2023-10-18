@@ -41,3 +41,28 @@ extension NSAttributedString {
         )
     }
 }
+
+extension NSAttributedString {
+    public class Builder {
+        private var attributed: NSMutableAttributedString
+        
+        init() {
+            self.attributed = .init()
+        }
+        
+        init(attributed: NSMutableAttributedString) {
+            self.attributed = attributed
+        }
+    }
+}
+
+extension NSAttributedString.Builder {
+    public func append(_ attr: NSAttributedString) -> NSAttributedString.Builder {
+        attributed.append(attr)
+        return self
+    }
+    
+    public func build() -> NSAttributedString {
+        attributed
+    }
+}
