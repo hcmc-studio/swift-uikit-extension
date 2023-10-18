@@ -8,9 +8,11 @@
 import Foundation
 import UIKit
 
-open class XUITableViewCell: UITableViewCell, UIViewExtension {
+open class XUITableViewCell<Delegate>: UITableViewCell, UIViewExtension {
     public var onClick: (() -> Void)? = nil
     public var indexPath: IndexPath!
+    public var delegate: Delegate!
+    
     open var contentContainer = XUIView()
     
     private var task: Task<Void, any Error>? = nil
