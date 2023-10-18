@@ -46,11 +46,11 @@ extension NSAttributedString {
     public class Builder {
         private var attributed: NSMutableAttributedString
         
-        init() {
+        public init() {
             self.attributed = .init()
         }
         
-        init(attributed: NSMutableAttributedString) {
+        public init(attributed: NSMutableAttributedString) {
             self.attributed = attributed
         }
     }
