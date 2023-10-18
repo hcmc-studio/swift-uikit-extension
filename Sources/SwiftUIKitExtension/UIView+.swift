@@ -24,6 +24,14 @@ extension UIView {
             onClick()
         }
     }
+    
+    public var screenWidth: CGFloat {
+        window?.windowScene?.screen.bounds.width ?? .zero
+    }
+    
+    public var screenHeigh: CGFloat {
+        window?.windowScene?.screen.bounds.height ?? .zero
+    }
 }
 
 extension UIViewExtension where Self: UIView {
