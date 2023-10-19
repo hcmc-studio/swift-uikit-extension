@@ -17,9 +17,28 @@ open class XUINavigationController: UINavigationController {
         
         interactivePopGestureRecognizer?.delegate = self
     }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateTabBarAppearance()
+        updateNavigationBarAppearance()
+    }
 }
 
 extension XUINavigationController: UIGestureRecognizerDelegate {
+    public func updateTabBarAppearance() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarItem.scrollEdgeAppearance = tabBarAppearance
+    }
+    
+    public func updateNavigationBarAppearance() {
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithOpaqueBackground()
+        navigationItem.scrollEdgeAppearance = navigationBarAppearance
+    }
+    
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         performSwipeToBack && viewControllers.count > 1
     }

@@ -36,8 +36,4 @@ extension UITableView {
         
         return cell
     }
-    
-    public var isBottom: Bool {
-        contentOffset.y >= (contentSize.height - bounds.height)
-    }
 }
