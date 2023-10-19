@@ -10,6 +10,7 @@ import UIKit
 
 open class XUILabel: UILabel, UIViewExtension {
     public var onClick: (() -> Void)? = nil
+    public var padding: UIEdgeInsets = .zero
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,5 +20,9 @@ open class XUILabel: UILabel, UIViewExtension {
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
         addOnClickRecognizer()
+    }
+    
+    open override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: padding))
     }
 }
