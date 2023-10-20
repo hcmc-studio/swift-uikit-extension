@@ -257,7 +257,6 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         view.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.startAnimating()
@@ -283,6 +282,14 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
     }
     
     open func initializeTableSections(tableSections: inout [any XUIListViewControllerTableSection]) {}
+    
+    open func shouldTableViewDelegateInitialized() -> Bool {
+        true
+    }
+    
+    open func shouldTableViewDataSourceInitialized() -> Bool {
+        true
+    }
     
     open func numberOfSections(in tableView: UITableView) -> Int {
         tableSections.count
