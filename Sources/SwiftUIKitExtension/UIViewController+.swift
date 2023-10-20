@@ -270,6 +270,9 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
         tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
+        for tableSection in tableSections {
+            tableView.register(tableSection.cell, forCellReuseIdentifier: tableSection.reuseIdentifier)
+        }
         
         NSLayoutConstraint.activate(
             activityIndicator.center(equalTo: view),
@@ -290,4 +293,7 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
     }
 }
 
-public protocol XUIListViewControllerTableSection {}
+public protocol XUIListViewControllerTableSection {
+    var cell: XUITableViewCell<Any>.Type { get }
+    var reuseIdentifier: String { get }
+}
