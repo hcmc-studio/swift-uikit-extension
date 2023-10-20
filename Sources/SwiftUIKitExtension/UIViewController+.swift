@@ -248,3 +248,46 @@ extension XUIViewControllerFetchDelegate {
         )
     }
 }
+
+open class XUIListViewController: XUIViewController, UITableViewDelegate, UITableViewDataSource {
+    public let activityIndicator = XUIActivityIndicatorView(style: .medium)
+    public let tableView = XUITableView()
+    public var tableSections = [any XUIListViewControllerTableSection]()
+    
+    open override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.startAnimating()
+        
+        view.addSubview(tableView)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.alwaysBounceHorizontal = false
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.allowsSelection = false
+        tableView.separatorStyle = .none
+        tableView.isHidden = true
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        NSLayoutConstraint.activate(
+            activityIndicator.center(equalTo: view),
+            tableView.fit(equalTo: view)
+        )
+    }
+    
+    open func numberOfSections(in tableView: UITableView) -> Int {
+        tableSections.count
+    }
+    
+    open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        fatalError("Not Implemented: XUIListViewController.tableView(_:numberOfRowsInSection:)")
+    }
+    
+    open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        fatalError("Not Implemented: XUIListViewController.tableView(_:cellForRowAt:)")
+    }
+}
+
+public protocol XUIListViewControllerTableSection {}
