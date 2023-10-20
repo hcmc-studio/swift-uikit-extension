@@ -268,8 +268,12 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
         tableView.isHidden = true
-        tableView.delegate = self
-        tableView.dataSource = self
+        if shouldTableViewDelegateInitialized() {
+            tableView.delegate = self
+        }
+        if shouldTableViewDataSourceInitialized() {
+            tableView.dataSource = self
+        }
         initializeTableSections(tableSections: &tableSections)
         for tableSection in tableSections {
             tableView.register(tableSection.cell, forCellReuseIdentifier: tableSection.reuseIdentifier)
