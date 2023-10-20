@@ -257,6 +257,7 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
     open override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         view.addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.startAnimating()
@@ -270,6 +271,7 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
         tableView.isHidden = true
         tableView.delegate = self
         tableView.dataSource = self
+        initializeTableSections(tableSections: &tableSections)
         for tableSection in tableSections {
             tableView.register(tableSection.cell, forCellReuseIdentifier: tableSection.reuseIdentifier)
         }
