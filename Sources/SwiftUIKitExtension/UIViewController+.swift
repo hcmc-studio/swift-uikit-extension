@@ -289,14 +289,14 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
     }
     
     open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableSections[indexPath.section].cell(forRowAt: indexPath)
+        fatalError("Not Implemented: XUIListViewController.tableView(_:cellForRowAt:)")
     }
 }
 
 public protocol XUIListViewControllerTableSection {
+    associatedtype ViewController: XUIListViewController
+    
     var cell: AnyClass { get }
     
     var reuseIdentifier: String { get }
-    
-    func cell(forRowAt indexPath: IndexPath) -> XUITableViewCell<Any>
 }
