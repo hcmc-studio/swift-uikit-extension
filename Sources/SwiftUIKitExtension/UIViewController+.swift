@@ -252,7 +252,7 @@ extension XUIViewControllerFetchDelegate {
 open class XUIListViewController: XUIViewController, UITableViewDelegate, UITableViewDataSource {
     public let activityIndicator = XUIActivityIndicatorView(style: .medium)
     public let tableView = XUITableView()
-    public var tableSections = [any XUIListViewControllerTableSection]()
+    public private(set) var tableSections = [any XUIListViewControllerTableSection]()
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -279,6 +279,8 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
             tableView.fit(equalTo: view)
         )
     }
+    
+    open func initializeTableSections(tableSections: inout [any XUIListViewControllerTableSection]) {}
     
     open func numberOfSections(in tableView: UITableView) -> Int {
         tableSections.count
