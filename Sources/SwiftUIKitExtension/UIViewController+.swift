@@ -294,9 +294,6 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
 }
 
 public protocol XUIListViewControllerTableSection {
-    associatedtype ViewController: XUIListViewController
-    
     var cell: AnyClass { get }
-    
     var reuseIdentifier: String { get }
 }
