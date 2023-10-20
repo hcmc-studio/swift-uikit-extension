@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hcmc-studio/swift-concurrency-extension.git",
       "state" : {
-        "branch" : "0.0.58",
-        "revision" : "56a5c83dd060babcbd74f886e08860281f3381c9"
+        "branch" : "0.0.59",
+        "revision" : "67dc33b45e3f40e644bae627a1d548bc3ea11909"
       }
     },
     {
@@ -14,7 +14,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hcmc-studio/swift-quartz-core-extension.git",
       "state" : {
-        "branch" : "0.0.58",
+        "branch" : "0.0.59",
         "revision" : "c6c4e427a668d343ba7ac7631a9b41cd9db10351"
       }
     }
