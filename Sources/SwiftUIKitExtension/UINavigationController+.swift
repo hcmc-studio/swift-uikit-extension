@@ -16,31 +16,23 @@ open class XUINavigationController: UINavigationController {
         super.viewDidLoad()
         
         interactivePopGestureRecognizer?.delegate = self
+        updateNavigationBarAppearance()
     }
     
     open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        updateTabBarAppearance()
-        updateNavigationBarAppearance()
     }
 }
 
 extension XUINavigationController: UIGestureRecognizerDelegate {
-    public func updateTabBarAppearance() {
-        let tabBarAppearance = UITabBarAppearance()
-        tabBarAppearance.configureWithOpaqueBackground()
-        tabBarItem.scrollEdgeAppearance = tabBarAppearance
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        performSwipeToBack && viewControllers.count > 1
     }
     
     public func updateNavigationBarAppearance() {
         let navigationBarAppearance = UINavigationBarAppearance()
         navigationBarAppearance.configureWithOpaqueBackground()
         navigationItem.scrollEdgeAppearance = navigationBarAppearance
-    }
-    
-    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        performSwipeToBack && viewControllers.count > 1
     }
 }
 
@@ -100,7 +92,7 @@ extension UINavigationController {
             fatalError("Initial view controller is not found in storyboard `\(storyboard)`")
         }
         
-        push(viewController: viewController)
+        pushViewController(viewController, animated: animated)
         
         return viewController
     }
@@ -115,7 +107,7 @@ extension UINavigationController {
     ) -> ViewController {
         let viewController = UIStoryboard(name: storyboard, bundle: .main).instantiateViewController(withIdentifier: identifier) as! ViewController
         viewController.arguments = arguments ?? [:]
-        push(viewController: viewController)
+        pushViewController(viewController, animated: animated)
         
         return viewController
     }

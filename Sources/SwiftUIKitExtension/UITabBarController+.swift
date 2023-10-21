@@ -15,11 +15,18 @@ open class XUITabBarController: UITabBarController {
         super.viewDidLoad()
         
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        updateTabBarAppearance()
     }
 }
 
 extension XUITabBarController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         performSwipeToBack && (navigationController?.viewControllers.count ?? 0) > 1
+    }
+    
+    public func updateTabBarAppearance() {
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithOpaqueBackground()
+        tabBarItem.scrollEdgeAppearance = tabBarAppearance
     }
 }
