@@ -275,6 +275,7 @@ open class XUIListViewController: XUIViewController, UITableViewDelegate, UITabl
         tableView.showsHorizontalScrollIndicator = false
         tableView.allowsSelection = false
         tableView.separatorStyle = .none
+        tableView.contentInset.bottom = 72
         tableView.isHidden = true
         if shouldTableViewDelegateInitialized() {
             tableView.delegate = self
