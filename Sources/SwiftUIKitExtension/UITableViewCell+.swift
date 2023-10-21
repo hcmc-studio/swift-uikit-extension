@@ -20,24 +20,27 @@ open class XUITableViewCell<Delegate>: UITableViewCell, UIViewExtension {
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         addOnClickRecognizer()
-        prepareContainer()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+        
         addOnClickRecognizer()
-        prepareContainer()
     }
     
     private func prepareContainer() {
         contentView.addSubview(contentContainer)
         contentContainer.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate(contentContainer.fit(equalTo: contentView))
     }
     
     func bind() {
         if !isViewPresent {
+            isViewPresent = true
+            prepareContainer()
             prepareView()
         }
         
