@@ -27,6 +27,14 @@ open class XUIViewController: UIViewController {
         
         initializeFetchDelegate()
         fetchDelegate?.onLoad(viewController: self)
+        
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.configureWithDefaultBackground()
+        tabBarItem.scrollEdgeAppearance = tabBarAppearance
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithDefaultBackground()
+        navigationItem.scrollEdgeAppearance = navigationBarAppearance
     }
     
     open override func viewDidAppear(_ animated: Bool) {
