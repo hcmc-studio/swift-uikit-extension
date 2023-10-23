@@ -15,6 +15,26 @@ extension NSAttributedString {
         letterSpacing: CGFloat = -0.3,
         foregroundColor: UIColor = .label,
         underlineColor: UIColor = .label,
+        underlineStyle: NSUnderlineStyle = []
+    ) {
+        self.init(
+            string: string,
+            attributes: [
+                .font: font,
+                .kern: letterSpacing,
+                .foregroundColor: foregroundColor,
+                .underlineColor: underlineColor,
+                .underlineStyle: underlineStyle.rawValue
+            ]
+        )
+    }
+    
+    public convenience init(
+        _ string: String,
+        font: UIFont,
+        letterSpacing: CGFloat = -0.3,
+        foregroundColor: UIColor = .label,
+        underlineColor: UIColor = .label,
         underlineStyle: NSUnderlineStyle = [],
         lineSpacing: CGFloat = 0,
         lineBreakMode: NSLineBreakMode = .byTruncatingTail,
