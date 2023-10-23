@@ -62,11 +62,22 @@ open class XUITableViewCell<Delegate>: UITableViewCell, UIViewExtension {
     open func fetch() async throws {}
     
     /// View의 내용을 초기화하는 블록입니다. 매 bind마다 실행됩니다.
-    open func bindView(error: Error?) {}
+    open func bindView(error: Error?) {
+        if let error = error {
+            print("\(String(describing: Self.self)).bindView(error:): \(error)")
+        }
+    }
+    
+    open func onFetchCanceled(task: Task<Void, any Error>) {
+        print("\(String(describing: Self.self)).onFetchCanceled(task:)")
+    }
     
     open override func prepareForReuse() {
         super.prepareForReuse()
         
-        task?.cancel()
+        if let task = task {
+            task.cancel()
+            onFetchCanceled(task: task)
+        }
     }
 }
