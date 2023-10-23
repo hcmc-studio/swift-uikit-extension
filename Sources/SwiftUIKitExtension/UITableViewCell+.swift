@@ -12,7 +12,7 @@ open class XUITableViewCell<Delegate>: UITableViewCell, UIViewExtension {
     public var onClick: (() -> Void)? = nil
     public var indexPath: IndexPath!
     public var delegate: Delegate!
-    
+    open var padding: UIEdgeInsets { .zero }
     open var contentContainer = XUIView()
     
     private var task: Task<Void, any Error>? = nil
@@ -30,13 +30,6 @@ open class XUITableViewCell<Delegate>: UITableViewCell, UIViewExtension {
         addOnClickRecognizer()
     }
     
-    private func prepareContainer() {
-        contentView.addSubview(contentContainer)
-        contentContainer.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate(contentContainer.fit(equalTo: contentView))
-    }
-    
     func bind() {
         if !isViewPresent {
             isViewPresent = true
@@ -48,6 +41,19 @@ open class XUITableViewCell<Delegate>: UITableViewCell, UIViewExtension {
             withoutResult: fetch,
             onReady: bindView
         )
+    }
+    
+    private func prepareContainer() {
+        contentView.addSubview(contentContainer)
+        contentContainer.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate(contentContainer.fit(
+            equalTo: contentView,
+            top: padding.top,
+            leading: padding.left,
+            trailing: padding.right,
+            bottom: padding.bottom
+        ))
     }
     
     /// View를 초기화하는 블록입니다. 1회만 실행됩니다.
